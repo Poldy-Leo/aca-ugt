@@ -122,9 +122,14 @@
     { i: 12, pdf: "pdfs/03b3eb0e.pdf",  title: "Eix 7 · Transparència i comunicació" },
   ];
 
-  // ---- Preview mode? (URL ?preview=1 unlocks everything) ----
+  // ============================================================
+  // PREVIEW MODE — token secret (ha de coincidir amb index.html)
+  // ============================================================
+  const PREVIEW_TOKEN = 'dic2026-7a3f9b2c';
+
+  // ---- Preview mode? ----
   const params = new URLSearchParams(location.search);
-  const preview = params.has('preview');
+  const preview = params.get('preview') === PREVIEW_TOKEN;
 
   // Today at 00:00 local
   const today = new Date(); today.setHours(0, 0, 0, 0);
