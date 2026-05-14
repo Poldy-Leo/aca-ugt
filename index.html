@@ -460,7 +460,7 @@
         <span class="lock-info">🔒 Disponible Dimecres 13 de maig</span>
       </div>
     </article>
-    <article class="path-row available" data-idx="1" data-pdf="pdfs/c11861b8.pdf" data-date="2026-05-14">
+    <article class="path-row available" data-idx="1" data-pdf="pdfs/c11861b8.pdf" data-date="2026-05-15">
       <div class="path-dam">
         <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
           <!-- ===== WATER COLUMN (x: 0-95) ===== -->
@@ -550,11 +550,11 @@
       </div>
       <div class="path-card">
         <span class="badge-new">NOU</span>
-        <span class="date">Dijous 14 de maig</span>
+        <span class="date">Divendres 15 de maig</span>
         <h2>Qui som</h2>
         <p>El teu sindicat, 100% de l&#39;ACA</p>
         <button class="card-cta" type="button">Obrir</button>
-        <span class="lock-info">🔒 Disponible Dijous 14 de maig</span>
+        <span class="lock-info">🔒 Disponible Divendres 15 de maig</span>
       </div>
     </article>
     <article class="path-row available" data-idx="2" data-pdf="pdfs/12e98350.pdf" data-date="2026-05-18">
@@ -1740,9 +1740,18 @@
 (function () {
   'use strict';
 
-  // ---- Preview mode? (URL ?preview=1) ----
+  // ============================================================
+  // PREVIEW MODE — protegit amb un token secret
+  // ============================================================
+  // Per veure totes les fites desbloquejades, cal usar l'URL:
+  //     https://el-teu-lloc/?preview=EL_TEU_SECRET
+  // Canvia el valor de PREVIEW_TOKEN per a un secret propi.
+  // (Ha de coincidir EXACTAMENT amb el de viewer.html.)
+  const PREVIEW_TOKEN = 'dic2026-7a3f9b2c';
+
+  // ---- Preview mode? ----
   const params = new URLSearchParams(location.search);
-  const preview = params.has('preview');
+  const preview = params.get('preview') === PREVIEW_TOKEN;
   if (preview) document.body.classList.add('preview');
 
   // ---- Visited memory ----
@@ -1788,7 +1797,9 @@
     if (!row) return;
     if (row.classList.contains('locked')) { e.preventDefault(); return; }
     const idx = parseInt(row.dataset.idx, 10);
-    window.open(`viewer.html?d=${idx}`, '_blank', 'noopener,noreferrer');
+    // If we're in preview, propagate the token to viewer so future PDFs are visible too
+    const viewerUrl = `viewer.html?d=${idx}` + (preview ? `&preview=${PREVIEW_TOKEN}` : '');
+    window.open(viewerUrl, '_blank', 'noopener,noreferrer');
     markVisited(idx);
     row.classList.remove('available');
     row.classList.add('visited');
