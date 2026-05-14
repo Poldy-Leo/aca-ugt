@@ -1,0 +1,270 @@
+═══════════════════════════════════════════════════════════════
+  EL CAMÍ DEL DIC DE CONTENCIÓ — Campanya ACA-UGT 2026
+═══════════════════════════════════════════════════════════════
+
+ESTRUCTURA DEL PAQUET (un cop descomprimit)
+───────────────────────────────────────────
+  MAPATGE-PDFS-PRIVAT.txt   ← KEEP-LO LOCAL · NO PUJAR A NETLIFY
+  deploy/                   ← AQUESTA carpeta és la que es puja
+      ├── index.html            (el camí amb el dic)
+      ├── viewer.html           (visor de PDFs amb anti-còpia)
+      ├── pdfs/                 (13 PDFs amb nom ofuscat)
+      ├── img/
+      │   ├── logo.png          (logo al hero · fons negre eliminat)
+      │   └── equip.png         (il·lustració al peu)
+      ├── encripta-pdf.py       (encripta PDFs nous · opcional)
+      ├── provar-local.bat      (prova local · Windows)
+      ├── provar-local.sh       (prova local · Mac/Linux)
+      └── LLEGEIX-ME.txt        (aquest fitxer)
+
+COMPORTAMENT
+────────────
+  · Els visitants només veuen les fites JA PUBLICADES.
+  · Les futures NO es mostren — cap pista del que vindrà.
+  · A mesura que avança la data, apareixen noves fites automàticament.
+  · Els noms dels PDFs estan ofuscats (no es poden endevinar).
+  · El logotip a dalt es mostra sobre un cercle blanc per garantir
+    que el text «Agència Catalana de l'Aigua» sigui llegible
+    sobre el fons blau del hero.
+
+DESPLEGAR A NETLIFY (gratuït, 30 segons)
+────────────────────────────────────────
+  1. Ves a https://app.netlify.com/drop
+  2. Arrossega la carpeta `deploy/` sencera
+  3. T'apareix una URL fixa tipus https://NOM.netlify.app
+  4. AQUESTA URL és la que comparteixes als correus diaris.
+
+═══════════════════════════════════════════════════════════════
+  ACTUALITZAR UN PDF (sense canviar l'enllaç)
+═══════════════════════════════════════════════════════════════
+
+  L'enllaç de Netlify és FIX. Pots actualitzar contingut tantes
+  vegades com vulguis sense canviar-lo:
+
+  1. Genera el nou PDF des del PowerPoint original
+  2. Obre `MAPATGE-PDFS-PRIVAT.txt` i busca el nom ofuscat
+     que correspon al missatge (ex: 4ce14270.pdf → Frases de suport)
+  3. Reanomena el teu PDF nou amb aquest nom exacte
+  4. (Opcional, recomanat) Encripta'l:
+        python3 encripta-pdf.py el-teu-pdf-renombrat.pdf
+     Necessita la llibreria pikepdf:
+        pip install pikepdf
+  5. Copia el fitxer dins de `deploy/pdfs/` (substituint l'existent)
+  6. Torna a Netlify → la teva site → "Deploys" → arrossega
+     la carpeta `deploy/` actualitzada
+  7. La mateixa URL serveix la nova versió en uns 30 segons
+
+═══════════════════════════════════════════════════════════════
+  ACTUALITZAR / SUBSTITUIR LES IMATGES
+═══════════════════════════════════════════════════════════════
+
+  Les imatges no tenen noms ofuscats — no fa falta, no contenen
+  pistes de campanya. Si en vols canviar alguna:
+
+  IMATGE DEL HERO (logo)
+  ──────────────────────
+  Ruta:    deploy/img/logo.png
+  Format:  PNG amb fons TRANSPARENT (sense fons negre!)
+  Mida:    Es mostra com a cercle de 110×110 px aprox.
+           Idealment puja un PNG quadrat de 300×300 px o més
+           perquè es vegi nítid en pantalles retina.
+
+  IMPORTANT: si el teu logo original té fons negre, fes-li
+  abans una de les dues coses:
+    (a) Treu-li el fons amb una eina online com
+        https://www.remove.bg o el GIMP.
+    (b) Demana'm que t'ho processi i te'l dono llest.
+
+  IMATGE DEL PEU (equip)
+  ──────────────────────
+  Ruta:    deploy/img/equip.png
+  Format:  PNG (preferentment amb fons transparent)
+  Mida:    Es mostra com a màxim 420 px d'amplada al peu
+           de la pàgina. Idealment puja una imatge més gran
+           (1200 px d'amplada) perquè s'escali bé.
+
+  ACTUALITZACIÓ
+  ─────────────
+  1. Substitueix el fitxer (`logo.png` o `equip.png`) a `deploy/img/`
+  2. Torna a Netlify → "Deploys" → arrossega `deploy/` actualitzat
+  3. La URL es manté, els canvis es publiquen en uns 30 s
+
+  PISTA: si vols veure els canvis abans de pujar-los, fes servir
+  `provar-local.bat` o `provar-local.sh` per aixecar un servidor
+  local i navega a http://localhost:8000/?preview=1.
+
+═══════════════════════════════════════════════════════════════
+  CANVIAR EL VÍDEO D'INICI
+═══════════════════════════════════════════════════════════════
+
+  El vídeo al principi de la pàgina està incrustat com a iframe
+  des de YouTube (versió privada: youtube-nocookie.com), de manera
+  que NO s'inclou cap arxiu de vídeo al paquet — tot ve de YouTube.
+
+  PER CANVIAR-LO
+  ──────────────
+  1. Puja el nou vídeo a YouTube
+  2. Copia l'ID del vídeo (la part després de "youtu.be/" o
+     "?v=" a l'URL). Per exemple, a https://youtu.be/iR4nRhFsMlI
+     l'ID és: iR4nRhFsMlI
+  3. Obre `deploy/index.html` amb un editor de text
+  4. Busca: youtube-nocookie.com/embed/
+  5. Reemplaça l'ID antic (iR4nRhFsMlI) per el nou
+  6. Re-puja la carpeta `deploy/` a Netlify
+
+  ELIMINAR EL VÍDEO
+  ─────────────────
+  Si vols la pàgina sense vídeo, busca i esborra tot el bloc:
+      <!-- ============ VIDEO INTRO ============ -->
+      <section class="video-intro">...</section>
+
+═══════════════════════════════════════════════════════════════
+  CANVIAR DATA, TÍTOL O SUBTÍTOL D'UNA PUBLICACIÓ
+═══════════════════════════════════════════════════════════════
+
+  Cada publicació es defineix dins de `deploy/index.html` com a
+  un bloc <article> com aquest:
+
+      <article class="path-row available" data-idx="0"
+               data-pdf="pdfs/4ce14270.pdf"
+               data-date="2026-05-13">
+        <div class="path-dam">...</div>
+        <div class="path-card">
+          <span class="badge-new">NOU</span>
+          <span class="date">Dimecres 13 de maig</span>      ← etiqueta visible
+          <h2>Frases de suport</h2>                            ← TÍTOL
+          <p>El que diuen els companys de l'ACA</p>            ← SUBTÍTOL
+          <button class="card-cta" type="button">Obrir</button>
+          <span class="lock-info">🔒 Disponible Dimecres 13 de maig</span>
+        </div>
+      </article>
+
+  COM TROBAR-LA
+  ─────────────
+  Obre `deploy/index.html` amb un editor de text (Notepad++,
+  VS Code, Sublime…) i fes Ctrl+F amb el títol actual de la
+  publicació (per exemple, "Frases de suport"). T'hi porta directe.
+
+  ──────────────────────────────
+  CANVIAR LA DATA DE PUBLICACIÓ
+  ──────────────────────────────
+  Hi ha DOS llocs que has de canviar alhora (és important):
+
+  1. data-date="2026-05-13"  →  data-date="2026-05-14"
+     Format: ISO (AAAA-MM-DD)
+     Això és el que el JavaScript usa per decidir si mostrar
+     o no la fita. Si NO el canvies, la fita NO es desbloquejarà
+     el nou dia.
+
+  2. <span class="date">Dimecres 13 de maig</span>
+     →
+     <span class="date">Dijous 14 de maig</span>
+     Format: lliure, en català. Això és l'etiqueta que veuen
+     els visitants al damunt del títol.
+
+  3. (Opcional però recomanat per coherència)
+     <span class="lock-info">🔒 Disponible Dimecres 13 de maig</span>
+     →
+     <span class="lock-info">🔒 Disponible Dijous 14 de maig</span>
+
+  ──────────────────
+  CANVIAR EL TÍTOL
+  ──────────────────
+  Edita el contingut entre <h2> i </h2>:
+      <h2>Frases de suport</h2>
+      →
+      <h2>Suport de la plantilla</h2>
+
+  IMPORTANT: si canvies un títol, també hauries de canviar-lo
+  a `deploy/viewer.html` (la barra superior del visor PDF) per
+  coherència. Obre viewer.html, busca el títol antic dins de
+  l'array `items` i actualitza'l. No és imprescindible, però
+  queda més polit.
+
+  ───────────────────────
+  CANVIAR EL SUBTÍTOL
+  ───────────────────────
+  Edita el contingut entre <p> i </p>:
+      <p>El que diuen els companys de l'ACA</p>
+      →
+      <p>Veus reals de la plantilla</p>
+
+  ─────────────────────
+  EXEMPLE: MOURE "QUI SOM" DEL 15 AL 16 DE MAIG
+  ─────────────────────
+  ABANS:
+      <article class="path-row available" data-idx="1"
+               data-pdf="pdfs/c11861b8.pdf"
+               data-date="2026-05-15">
+        ...
+          <span class="date">Divendres 15 de maig</span>
+          <h2>Qui som</h2>
+          <p>El teu sindicat, 100% de l'ACA</p>
+          ...
+          <span class="lock-info">🔒 Disponible Divendres 15 de maig</span>
+
+  DESPRÉS:
+      <article class="path-row available" data-idx="1"
+               data-pdf="pdfs/c11861b8.pdf"
+               data-date="2026-05-16">          ← canviat
+        ...
+          <span class="date">Dissabte 16 de maig</span>  ← canviat
+          <h2>Qui som</h2>                                ← intacte
+          <p>El teu sindicat, 100% de l'ACA</p>           ← intacte
+          ...
+          <span class="lock-info">🔒 Disponible Dissabte 16 de maig</span>
+
+  Després puja la carpeta `deploy/` actualitzada a Netlify.
+
+  ────────────
+  ⚠️  AVISOS
+  ────────────
+  · NO toquis l'atribut `data-idx`. És un identificador intern
+    que el navegador usa per recordar quines fites ja s'han obert.
+    Si el canvies, els visitants que ja ho havien obert tornaran
+    a veure el badge "NOU".
+
+  · NO toquis l'atribut `data-pdf` a no ser que estiguis també
+    substituint el PDF (en aquest cas, consulta la secció
+    «ACTUALITZAR UN PDF» més amunt).
+
+  · Si retardes una publicació a una data futura, qualsevol
+    visitant que ja l'havia vista NO la veurà fins que arribi
+    la nova data. És el comportament esperat del bloqueig per
+    data, però val la pena tenir-ho present.
+
+═══════════════════════════════════════════════════════════════
+  MODE PREVIEW · PROVAR EN LOCAL · PRIVACITAT
+═══════════════════════════════════════════════════════════════
+
+  MODE PREVIEW (per a revisió interna)
+  Afegeix `?preview=1` a l'URL → totes les fites es desbloquegen.
+  Exemple: https://nom-aleatori.netlify.app/?preview=1
+
+  PROVAR EN LOCAL
+  ⚠️  Si obres l'index.html directament des del disc (file://)
+  el VÍDEO de YouTube mostrarà «Error 153». És normal — YouTube
+  no permet incrustar vídeos en pàgines obertes des de l'arxiu
+  local. Per provar el vídeo en local:
+
+  Windows: doble-clic a `provar-local.bat`
+  Mac/Linux: doble-clic a `provar-local.sh`
+  Després obre http://localhost:8000/?preview=1
+
+  Un cop penjat a Netlify (HTTPS) el vídeo funcionarà sense
+  cap problema.
+
+  PRIVACITAT
+  L'URL de Netlify és tècnicament pública però «no descoberta»:
+  no surt a Google (noindex), té un nom aleatori, i només qui
+  rebi l'enllaç pot entrar-hi. Per a una campanya sindical
+  interna n'hi ha prou amb la fricció que oferim:
+    · URL no indexada
+    · Noms de PDFs ofuscats
+    · Dies futurs amagats
+    · PDFs encriptats (no copy / no print)
+    · Visor amb anti-clic-dret / anti-Ctrl+S
+
+═══════════════════════════════════════════════════════════════
+  ACA-UGT 2026 · Defensem el que tens, conquerim el que ens falta
+═══════════════════════════════════════════════════════════════

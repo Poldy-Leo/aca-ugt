@@ -1,0 +1,1802 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<title>El camí del dic de contenció · ACA-UGT 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="La campanya ACA-UGT per a les eleccions sindicals del 2026. Un camí de 13 fites, una per cada missatge.">
+<meta name="robots" content="noindex">
+<style>
+  :root {
+    --blau-aca:   #2E6CB0;
+    --blau-fosc:  #1F4F86;
+    --blau-clar:  #5B96D4;
+    --vermell:    #D71920;
+    --vermell-d:  #A8141A;
+    --porpra:     #7A4A8E;
+    --magenta:    #C73E7F;
+    --gris-fosc:  #44505E;
+    --gris-fred:  #7C8595;
+    --gris-clar:  #E5E9EE;
+    --aigua:      #B5D1E8;
+    --aigua-fosc: #6FA0C8;
+    --bg:         #F7F8FA;
+    --ink:        #1A1A1A;
+    --muted:      #5A6573;
+    --line:       #D5DAE0;
+    --shadow:     0 2px 6px rgba(31,79,134,.06), 0 12px 28px -14px rgba(31,79,134,.18);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.55; font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- VIDEO INTRO (between hero and path) ---------- */
+  .video-intro {
+    background: linear-gradient(180deg, #163A6A 0%, var(--bg) 100%);
+    padding: 40px 24px 36px;
+  }
+  .video-wrap {
+    max-width: 680px; margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 24px 56px -18px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.18);
+  }
+  .video-wrap iframe {
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--blau-aca) 0%, var(--blau-fosc) 70%, #163A6A 100%);
+    color: white; padding: 40px 24px 56px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: -50% -10% auto auto; width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(255,255,255,.08), transparent 65%);
+    pointer-events: none;
+  }
+  .hero .brand {
+    display: inline-block; font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    opacity: .9; margin-bottom: 14px; padding: 4px 12px; border: 1px solid rgba(255,255,255,.3); border-radius: 999px;
+  }
+
+  /* ---------- Logo badge in hero (white circle to ensure contrast) ---------- */
+  .hero-logo {
+    display: block;
+    width: 110px; height: 110px;
+    margin: 0 auto 22px;
+    background: white;
+    border-radius: 50%;
+    padding: 12px;
+    box-shadow: 0 10px 32px rgba(0,0,0,.22), 0 2px 6px rgba(0,0,0,.08);
+    position: relative; z-index: 1;
+  }
+  .hero-logo img {
+    display: block; width: 100%; height: 100%;
+    object-fit: contain;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 64px); margin: 0 0 14px; line-height: 1.02; font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .hero .lema {
+    font-size: clamp(15px, 1.8vw, 19px); opacity: .95; margin-bottom: 32px; font-style: italic;
+  }
+  .hero .intro {
+    max-width: 680px; margin: 0 auto;
+    background: rgba(255,255,255,.08); border-left: 3px solid var(--vermell);
+    padding: 14px 22px; text-align: left; border-radius: 4px; font-size: 15px;
+  }
+  .preview-banner {
+    background: var(--magenta); color: white; padding: 8px 16px; text-align: center;
+    font-size: 13px; font-weight: 600; letter-spacing: .04em;
+    display: none;
+  }
+  body.preview .preview-banner { display: block; }
+
+  /* ---------- PATH ---------- */
+  main.path {
+    max-width: 1020px; margin: 0 auto; padding: 48px 24px 24px;
+  }
+  .path-row {
+    display: flex;
+    align-items: stretch;
+    gap: 28px;
+    position: relative;
+  }
+  .path-dam {
+    flex: 0 0 240px;
+    position: relative;
+    min-height: 200px;
+  }
+  .path-card-wrap { flex: 1 1 0; min-width: 0; }
+  /* The dam SVG fills its column, segments stack visually */
+  .dam-bg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+  .fist-wrap {
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    width: 110px; height: 150px;
+    z-index: 2;
+  }
+  .path-card {
+    flex: 1 1 0; min-width: 0;
+    background: white; border: 1px solid var(--line); border-radius: 14px;
+    padding: 22px 24px 20px; box-shadow: var(--shadow);
+    margin: 16px 0; transition: all .2s ease;
+    cursor: pointer; position: relative; z-index: 1;
+  }
+  .path-card:hover { transform: translateY(-2px); box-shadow: 0 2px 6px rgba(31,79,134,.10), 0 16px 36px -10px rgba(31,79,134,.22); }
+  .path-card .date {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--vermell); margin-bottom: 6px;
+  }
+  .path-card h2 {
+    font-size: clamp(20px, 2.4vw, 25px); margin: 0 0 8px; color: var(--ink); font-weight: 800; letter-spacing: -.01em;
+  }
+  .path-card p {
+    margin: 0 0 14px; color: var(--muted); font-size: 15px;
+  }
+  .card-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--vermell); color: white; padding: 9px 18px; border-radius: 999px;
+    font-weight: 700; font-size: 14px; border: none; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .card-cta:hover { background: var(--vermell-d); }
+  .card-cta::after { content: "→"; font-size: 16px; line-height: 1; }
+
+  /* ---------- LOCKED state: hide entirely so future fites give no hints ---------- */
+  .path-row.locked { display: none !important; }
+  .lock-info { display: none; }
+
+  /* ---------- VISITED state ---------- */
+  .path-row.visited .path-card { border-color: var(--porpra); background: #fbf7fd; }
+  .path-row.visited .date { color: var(--porpra); }
+  .path-row.visited .card-cta { background: var(--porpra); }
+  .path-row.visited .card-cta:hover { background: #623a73; }
+  .path-row.visited .card-cta::after { content: "✓"; }
+
+  /* ---------- AVAILABLE state badge ---------- */
+  .badge-new {
+    position: absolute; top: 16px; right: 18px;
+    background: var(--vermell); color: white;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 9px; border-radius: 999px;
+    animation: pulseBadge 2.2s ease-in-out infinite;
+  }
+  .path-row.locked .badge-new,
+  .path-row.visited .badge-new { display: none; }
+  @keyframes pulseBadge {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.06); opacity: .85; }
+  }
+
+  /* ---------- DAM SEGMENT — multi-layer water waves ---------- */
+  /* Three wave layers, each with its own animation curve, create the
+     illusion of pressure that's alive but contained. Inspired by
+     Nicholas Gratton's "Waves" technique, adapted to the ACA-UGT palette. */
+  .wave-back  { animation: waveBack  6.2s ease-in-out infinite; transform-origin: center; }
+  .wave-mid   { animation: waveMid   4.6s ease-in-out infinite; transform-origin: center; }
+  .wave-front { animation: waveFront 5.4s ease-in-out infinite; transform-origin: center; }
+  .wave-crest { animation: waveCrest 4.8s ease-in-out alternate infinite; transform-origin: center; }
+
+  @keyframes waveBack {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(7px, 3px) scale(1.02); }
+  }
+  @keyframes waveMid {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-4px, 4px); }
+    50%      { transform: translate(8px, 2px) scale(1.03); }
+    75%      { transform: translate(3px, 5px); }
+  }
+  @keyframes waveFront {
+    0%, 100% { transform: translate(0, 0); }
+    50%      { transform: translate(-6px, 3px); }
+  }
+  @keyframes waveCrest {
+    0%   { transform: translate(0, 2px); }
+    100% { transform: translate(12px, -1px); }
+  }
+
+  /* ---------- FIST states ---------- */
+  .fist-svg {
+    width: 100%; height: 100%; overflow: visible;
+    transform-origin: 50% 92%;  /* pivot near the wrist for natural rally motion */
+    transform-box: fill-box;
+  }
+  .fist-svg .fist-body { transition: fill .25s ease, opacity .25s ease; }
+
+  /* locked */
+  .path-row.locked .fist-svg .fist-body { fill: var(--gris-fred); opacity: .55; }
+  .path-row.locked .fist-svg .fist-line { stroke: var(--gris-fosc); opacity: .5; }
+  .path-row.locked .fist-svg .check-overlay { display: none; }
+
+  /* available — dynamic rally motion: lift + sway + scale + glow */
+  .path-row.available .fist-svg .fist-body { fill: var(--vermell); }
+  .path-row.available .fist-svg .fist-line { stroke: var(--vermell-d); }
+  .path-row.available .fist-svg .lock-overlay { display: none; }
+  .path-row.available .fist-svg .check-overlay { display: none; }
+  .path-row.available .fist-svg { animation: fistRally 2.8s ease-in-out infinite; }
+
+  @keyframes fistRally {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg) scale(1);
+      filter: drop-shadow(0 0 0 rgba(215, 25, 32, 0));
+    }
+    20% {
+      transform: translateY(-5px) rotate(-3deg) scale(1.02);
+      filter: drop-shadow(0 4px 8px rgba(215, 25, 32, .25));
+    }
+    50% {
+      transform: translateY(-10px) rotate(0deg) scale(1.05);
+      filter: drop-shadow(0 12px 18px rgba(215, 25, 32, .45));
+    }
+    80% {
+      transform: translateY(-5px) rotate(3deg) scale(1.02);
+      filter: drop-shadow(0 4px 8px rgba(215, 25, 32, .25));
+    }
+  }
+
+  /* Stagger animations across rows so the column "ripples" instead of moving in unison */
+  .path-row:nth-child(3n+1) .fist-svg { animation-delay: 0s;     animation-duration: 2.8s; }
+  .path-row:nth-child(3n+2) .fist-svg { animation-delay: -0.9s;  animation-duration: 3.1s; }
+  .path-row:nth-child(3n)   .fist-svg { animation-delay: -1.7s;  animation-duration: 2.6s; }
+
+  /* visited — subtle nod, more contemplative than rallying */
+  .path-row.visited .fist-svg .fist-body { fill: var(--porpra); }
+  .path-row.visited .fist-svg .fist-line { stroke: #532963; }
+  .path-row.visited .fist-svg .lock-overlay { display: none; }
+  .path-row.visited .fist-svg { animation: fistNod 4s ease-in-out infinite; }
+
+  @keyframes fistNod {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-3px) rotate(-1deg); }
+  }
+
+  /* ---------- CTA / END ---------- */
+  .cta {
+    max-width: 1020px; margin: 32px auto 0; padding: 0 24px;
+  }
+  .cta-inner {
+    background: linear-gradient(135deg, var(--vermell), var(--vermell-d));
+    color: white; border-radius: 16px; padding: 44px 28px; text-align: center;
+    box-shadow: 0 24px 60px -20px rgba(168,20,26,.4);
+  }
+  .cta-inner h3 { font-size: clamp(26px, 4vw, 36px); margin: 0 0 8px; font-weight: 800; }
+  .cta-inner p { margin: 0 0 22px; opacity: .96; font-size: 17px; }
+  .cta-btn {
+    display: inline-block; background: white; color: var(--vermell);
+    padding: 12px 28px; border-radius: 999px; text-decoration: none; font-weight: 800;
+    transition: transform .12s ease;
+  }
+  .cta-btn:hover { transform: translateY(-2px); }
+
+  /* ---------- FOOTER ---------- */
+  footer.peu {
+    text-align: center; padding: 48px 24px 32px; color: var(--muted); font-size: 13px;
+  }
+  footer.peu .lema-final {
+    color: var(--blau-fosc); font-size: 16px; font-weight: 800; margin-bottom: 6px;
+  }
+  .footer-equip {
+    display: block; max-width: 420px; width: 100%; height: auto;
+    margin: 8px auto 24px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 700px) {
+    main.path { padding: 28px 14px 16px; }
+    .path-row { gap: 14px; }
+    .path-dam { flex: 0 0 100px; min-height: 160px; }
+    .path-card { padding: 18px 18px 16px; margin: 10px 0; }
+    .fist-wrap { width: 70px; height: 95px; top: 14px; right: 10px; }
+    .cta-inner { padding: 32px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-banner">MODE PREVIEW · totes les fites desbloquejades</div>
+
+<!-- ============ SHARED SVG DEFINITIONS (gradients used by every dam segment) ============ -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Water "sky" — top light, deeper at bottom — gives depth to the water column -->
+    <linearGradient id="grad-water-bg" x1="0" y1="0" x2="0" y2="220" gradientUnits="userSpaceOnUse">
+      <stop offset="0"   stop-color="#E8F2FA"/>
+      <stop offset="0.6" stop-color="#A8C5DF"/>
+      <stop offset="1"   stop-color="#6E9BC2"/>
+    </linearGradient>
+    <!-- Back wave: deep blue, the heaviest, slowest layer -->
+    <linearGradient id="grad-wave-back" x1="0" y1="220" x2="0" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1F4F86"/>
+      <stop offset="1" stop-color="#3E7AB8"/>
+    </linearGradient>
+    <!-- Mid wave: ACA blue, medium speed -->
+    <linearGradient id="grad-wave-mid" x1="0" y1="220" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2E6CB0"/>
+      <stop offset="1" stop-color="#6FA0C8"/>
+    </linearGradient>
+    <!-- Front wave: lighter, closest layer -->
+    <linearGradient id="grad-wave-front" x1="0" y1="220" x2="0" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5B96D4"/>
+      <stop offset="1" stop-color="#8FB5D4"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-logo"><img src="img/logo.png" alt="ACA-UGT"></div>
+  <span class="brand">Eleccions sindicals 2026</span>
+  <h1>El camí del dic de contenció</h1>
+  <p class="lema">Defensem el que tens · Conquerim el que ens falta</p>
+  <div class="intro">
+    Aquí trobaràs els missatges de la campanya, fita a fita. Cada vegada que arribi una nova porta del nostre dic, la trobaràs aquí. Pots tornar quan vulguis: el que ja has obert es queda recordat.
+  </div>
+</header>
+
+<!-- ============ VIDEO INTRO ============ -->
+<section class="video-intro">
+  <div class="video-wrap">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/iR4nRhFsMlI?rel=0"
+      title="Vídeo d'inici de campanya · ACA-UGT 2026"
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- ============ PATH ============ -->
+<main class="path" id="path">
+    <article class="path-row available" data-idx="0" data-pdf="pdfs/4ce14270.pdf" data-date="2026-05-13">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dimecres 13 de maig</span>
+        <h2>Frases de suport</h2>
+        <p>El que diuen els companys de l&#39;ACA</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dimecres 13 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="1" data-pdf="pdfs/c11861b8.pdf" data-date="2026-05-14">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dijous 14 de maig</span>
+        <h2>Qui som</h2>
+        <p>El teu sindicat, 100% de l&#39;ACA</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dijous 14 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="2" data-pdf="pdfs/12e98350.pdf" data-date="2026-05-18">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dilluns 18 de maig</span>
+        <h2>L&#39;equip · part 1</h2>
+        <p>Un projecte col·lectiu, no individual</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dilluns 18 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="3" data-pdf="pdfs/441f21da.pdf" data-date="2026-05-18">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dilluns 18 de maig</span>
+        <h2>L&#39;equip · part 2</h2>
+        <p>Coneix les candidatures de l&#39;ACA-UGT</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dilluns 18 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="4" data-pdf="pdfs/4c267df1.pdf" data-date="2026-05-19">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dimarts 19 de maig</span>
+        <h2>Què hem fet i estem fent</h2>
+        <p>Resultats sobre la taula, no promeses</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dimarts 19 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="5" data-pdf="pdfs/01c0a2a0.pdf" data-date="2026-05-20">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dimecres 20 de maig</span>
+        <h2>El programa electoral</h2>
+        <p>Set eixos per a aquesta legislatura</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dimecres 20 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="6" data-pdf="pdfs/11ee27ed.pdf" data-date="2026-05-21">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dijous 21 de maig</span>
+        <h2>Eix 1 · Drets laborals</h2>
+        <p>Compliment del conveni i estabilitat</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dijous 21 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="7" data-pdf="pdfs/b6a2bb56.pdf" data-date="2026-05-22">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Divendres 22 de maig</span>
+        <h2>Eix 2 · Recuperació de drets</h2>
+        <p>Revertir les retallades del 2012</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Divendres 22 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="8" data-pdf="pdfs/0ea299e5.pdf" data-date="2026-05-25">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dilluns 25 de maig</span>
+        <h2>Eix 3 · Conciliació real</h2>
+        <p>35 hores, teletreball, flexibilitat</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dilluns 25 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="9" data-pdf="pdfs/cd99c942.pdf" data-date="2026-05-26">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dimarts 26 de maig</span>
+        <h2>Eix 4 · Carrera professional</h2>
+        <p>Relleu generacional i promoció</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dimarts 26 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="10" data-pdf="pdfs/89241a22.pdf" data-date="2026-05-27">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dimecres 27 de maig</span>
+        <h2>Eix 5 · Presència territorial</h2>
+        <p>Cap demarcació desatesa</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dimecres 27 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="11" data-pdf="pdfs/9ecf3e3e.pdf" data-date="2026-05-28">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dijous 28 de maig</span>
+        <h2>Eix 6 · Fermesa i via judicial</h2>
+        <p>La coherència entre el que diem i el que fem</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dijous 28 de maig</span>
+      </div>
+    </article>
+    <article class="path-row available" data-idx="12" data-pdf="pdfs/03b3eb0e.pdf" data-date="2026-05-28">
+      <div class="path-dam">
+        <svg class="dam-bg" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <!-- ===== WATER COLUMN (x: 0-95) ===== -->
+          <rect x="0" y="0" width="95" height="220" fill="url(#grad-water-bg)"/>
+
+          <!-- Back wave: heaviest, slowest, sits low -->
+          <g class="wave-back">
+            <path d="M-8 140 Q 10 128 24 140 T 50 140 T 76 140 T 105 140 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-back)"/>
+          </g>
+
+          <!-- Mid wave: ACA blue, medium speed -->
+          <g class="wave-mid">
+            <path d="M-8 160 Q 12 148 26 160 T 54 160 T 82 160 T 105 160 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-mid)" opacity=".88"/>
+          </g>
+
+          <!-- Front wave: lightest, closest, fastest movement -->
+          <g class="wave-front">
+            <path d="M-8 180 Q 14 170 30 180 T 60 180 T 90 180 T 105 180 L 105 220 L -8 220 Z"
+                  fill="url(#grad-wave-front)" opacity=".75"/>
+          </g>
+
+          <!-- White crest line: foam at the wave summit, alternating motion -->
+          <g class="wave-crest">
+            <path d="M-8 145 Q 12 133 28 145 T 56 145 T 84 145 T 105 145"
+                  fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".55"
+                  stroke-linecap="round"/>
+            <path d="M-8 165 Q 13 155 29 165 T 58 165 T 87 165 T 105 165"
+                  fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".35"
+                  stroke-linecap="round"/>
+          </g>
+
+          <!-- Threat labels — etched into the water -->
+          <g font-family="-apple-system, Segoe UI, sans-serif" font-size="9" fill="#FFFFFF"
+             opacity=".7" font-weight="700" letter-spacing=".5">
+            <text x="14" y="55"  transform="rotate(-3 14 55)">RETALLADES</text>
+            <text x="18" y="105" transform="rotate(2 18 105)">PRESSIÓ</text>
+            <text x="8"  y="200" transform="rotate(-2 8 200)" opacity=".6">PRECARIETAT</text>
+          </g>
+
+          <!-- ===== WALL (x: 95-160) ===== -->
+          <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+          <g opacity=".22" stroke="#1F4F86" stroke-width="1" fill="none">
+            <line x1="95" y1="30"  x2="160" y2="30"/>
+            <line x1="95" y1="65"  x2="160" y2="65"/>
+            <line x1="95" y1="100" x2="160" y2="100"/>
+            <line x1="95" y1="135" x2="160" y2="135"/>
+            <line x1="95" y1="170" x2="160" y2="170"/>
+            <line x1="127" y1="0"   x2="127" y2="30"/>
+            <line x1="127" y1="65"  x2="127" y2="100"/>
+            <line x1="127" y1="135" x2="127" y2="170"/>
+            <line x1="111" y1="30"  x2="111" y2="65"/>
+            <line x1="143" y1="30"  x2="143" y2="65"/>
+            <line x1="111" y1="100" x2="111" y2="135"/>
+            <line x1="143" y1="100" x2="143" y2="135"/>
+            <line x1="111" y1="170" x2="111" y2="205"/>
+            <line x1="143" y1="170" x2="143" y2="205"/>
+          </g>
+          <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+          <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+
+          <!-- ===== PROTECTED ZONE (x: 160-240) ===== -->
+          <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+        </svg>
+        <div class="fist-wrap">
+          <svg class="fist-svg" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+              <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke="currentColor" stroke-opacity=".55" stroke-width="1.5" fill="none"/>
+              <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z" fill="currentColor"/>
+              <path class="fist-body" d="M30 44 Q33 36 39 40 Q44 36 50 40 Q55 36 61 40 Q67 36 70 44 L70 50 L30 50 Z" fill="currentColor"/>
+              <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke="currentColor" stroke-opacity=".4" stroke-width="1.3" fill="none"/>
+              <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke="currentColor" stroke-opacity=".3" stroke-width="1.3" fill="none"/>
+              <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z" fill="currentColor"/>
+              <g class="lock-overlay" transform="translate(58, 86)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+                <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+                <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+              </g>
+              <g class="check-overlay" transform="translate(58, 22)">
+                <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+                <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+      </div>
+      <div class="path-card">
+        <span class="badge-new">NOU</span>
+        <span class="date">Dijous 28 de maig</span>
+        <h2>Eix 7 · Transparència i comunicació</h2>
+        <p>Una plantilla informada és més forta</p>
+        <button class="card-cta" type="button">Obrir</button>
+        <span class="lock-info">🔒 Disponible Dijous 28 de maig</span>
+      </div>
+    </article>
+  </main>
+
+<!-- ============ CTA ============ -->
+<aside class="cta">
+  <div class="cta-inner">
+    <h3>Suma't al dic de contenció</h3>
+    <p>El teu vot, la nostra força. Eleccions sindicals ACA · 2026.</p>
+    <a class="cta-btn" href="mailto:aca.ugt@gencat.cat?subject=Vull%20m%C3%A9s%20informaci%C3%B3%20d%E2%80%99ACA-UGT">Contacta'ns</a>
+  </div>
+</aside>
+
+<footer class="peu">
+  <img class="footer-equip" src="img/equip.png" alt="Equip d'ACA-UGT amb el puny aixecat">
+  <div class="lema-final">Defensem el que tens. Conquerim el que ens falta.</div>
+  <div>ACA-UGT · Eleccions sindicals 2026</div>
+</footer>
+
+<!-- ============ FIST SVG TEMPLATE (single, referenced via <use>) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <symbol id="fist-icon" viewBox="0 0 100 140">
+      <!-- Forearm -->
+      <rect class="fist-body" x="36" y="78" width="28" height="62" rx="5"/>
+      <line class="fist-line" x1="32" y1="80" x2="68" y2="80" stroke-width="1.5" fill="none"/>
+
+      <!-- Hand body (back of fist) -->
+      <path class="fist-body" d="M30 50 Q30 42 36 40 L64 40 Q70 42 70 50 L70 80 L30 80 Z"/>
+
+      <!-- Knuckles strip (4 bumps along top) -->
+      <path class="fist-body" d="
+        M30 44
+        Q33 36 39 40
+        Q44 36 50 40
+        Q55 36 61 40
+        Q67 36 70 44
+        L70 50 L30 50 Z"/>
+
+      <!-- Folded fingers line -->
+      <line class="fist-line" x1="32" y1="60" x2="68" y2="60" stroke-width="1.3" fill="none" opacity=".55"/>
+      <line class="fist-line" x1="32" y1="68" x2="68" y2="68" stroke-width="1.3" fill="none" opacity=".35"/>
+
+      <!-- Thumb (left side, sticking out subtly) -->
+      <path class="fist-body" d="M30 56 Q22 58 22 65 Q22 74 30 74 Z"/>
+
+      <!-- LOCK overlay (only visible when .locked) -->
+      <g class="lock-overlay" transform="translate(58, 86)">
+        <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#44505E" stroke-width="1.5"/>
+        <path d="M8 12 V8.5 a5 5 0 0 1 10 0 V12" stroke="#44505E" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <rect x="6" y="12" width="14" height="11" rx="1.5" fill="#44505E"/>
+        <circle cx="13" cy="17.5" r="1.6" fill="#FFFFFF"/>
+      </g>
+
+      <!-- CHECK overlay (only visible when .visited) -->
+      <g class="check-overlay" transform="translate(58, 22)">
+        <circle cx="13" cy="13" r="14" fill="#FFFFFF" stroke="#7A4A8E" stroke-width="2"/>
+        <path d="M6.5 13.5 L11 18 L19.5 8" stroke="#7A4A8E" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </symbol>
+
+    <!-- DAM SEGMENT template — water on left, wall, fist sits atop -->
+    <symbol id="dam-segment" viewBox="0 0 240 220" preserveAspectRatio="xMidYMid slice">
+      <!-- water area (left ~95px) -->
+      <rect x="0" y="0" width="95" height="220" fill="#E8F1F8"/>
+      <!-- waves -->
+      <g opacity=".55">
+        <path class="water-wave" d="M-10 30 Q15 22 40 30 T90 30 T140 30 L140 40 L-10 40 Z" fill="#6FA0C8"/>
+        <path class="water-wave slow" d="M-10 60 Q20 53 45 60 T95 60 T145 60 L145 70 L-10 70 Z" fill="#8FB5D4" opacity=".7"/>
+        <path class="water-wave" d="M-10 100 Q15 92 40 100 T90 100 T140 100 L140 110 L-10 110 Z" fill="#6FA0C8" opacity=".8"/>
+        <path class="water-wave slow" d="M-10 140 Q20 132 45 140 T95 140 T145 140 L145 150 L-10 150 Z" fill="#8FB5D4" opacity=".7"/>
+        <path class="water-wave" d="M-10 180 Q15 172 40 180 T90 180 T140 180 L140 190 L-10 190 Z" fill="#6FA0C8" opacity=".8"/>
+      </g>
+
+      <!-- wall (center, 95→160) -->
+      <rect x="95" y="0" width="65" height="220" fill="#2E6CB0"/>
+      <!-- wall texture (subtle bricks) -->
+      <g opacity=".25" stroke="#1F4F86" stroke-width="1" fill="none">
+        <line x1="95" y1="30"  x2="160" y2="30"/>
+        <line x1="95" y1="65"  x2="160" y2="65"/>
+        <line x1="95" y1="100" x2="160" y2="100"/>
+        <line x1="95" y1="135" x2="160" y2="135"/>
+        <line x1="95" y1="170" x2="160" y2="170"/>
+        <line x1="95" y1="205" x2="160" y2="205"/>
+        <line x1="127" y1="0"  x2="127" y2="30"/>
+        <line x1="127" y1="65" x2="127" y2="100"/>
+        <line x1="127" y1="135" x2="127" y2="170"/>
+        <line x1="111" y1="30" x2="111" y2="65"/>
+        <line x1="143" y1="30" x2="143" y2="65"/>
+        <line x1="111" y1="100" x2="111" y2="135"/>
+        <line x1="143" y1="100" x2="143" y2="135"/>
+        <line x1="111" y1="170" x2="111" y2="205"/>
+        <line x1="143" y1="170" x2="143" y2="205"/>
+      </g>
+      <!-- wall left edge highlight -->
+      <rect x="95" y="0" width="3" height="220" fill="#5B96D4" opacity=".7"/>
+      <!-- wall right edge shadow -->
+      <rect x="155" y="0" width="5" height="220" fill="#1F4F86" opacity=".4"/>
+      <!-- protected side (right, light) -->
+      <rect x="160" y="0" width="80" height="220" fill="#F7F8FA"/>
+    </symbol>
+
+    <!-- WATER LABELS (floating threats) -->
+    <symbol id="water-labels" viewBox="0 0 240 220">
+      <g font-family="-apple-system, sans-serif" font-size="9" fill="#1F4F86" opacity=".75" font-weight="600">
+        <text x="15" y="48" transform="rotate(-3 15 48)">RETALLADES</text>
+        <text x="20" y="120" transform="rotate(2 20 120)">PRESSIÓ</text>
+        <text x="10" y="180" transform="rotate(-2 10 180)">PRECARIETAT</text>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ JS ============ -->
+<script>
+(function () {
+  'use strict';
+
+  // ---- Preview mode? (URL ?preview=1) ----
+  const params = new URLSearchParams(location.search);
+  const preview = params.has('preview');
+  if (preview) document.body.classList.add('preview');
+
+  // ---- Visited memory ----
+  const VISITED_KEY = "aca_ugt_2026_visited";
+  function getVisited() {
+    try { return new Set(JSON.parse(localStorage.getItem(VISITED_KEY) || "[]")); }
+    catch { return new Set(); }
+  }
+  function markVisited(idx) {
+    const v = getVisited(); v.add(idx);
+    try { localStorage.setItem(VISITED_KEY, JSON.stringify([...v])); } catch {}
+  }
+  const visited = getVisited();
+
+  // ---- Walk pre-rendered rows and set correct state ----
+  const path = document.getElementById('path');
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  document.querySelectorAll('.path-row').forEach(row => {
+    const idx = parseInt(row.dataset.idx, 10);
+    const rowDate = new Date(row.dataset.date + "T00:00:00");
+
+    // Reset and compute correct state
+    row.classList.remove('available', 'locked', 'visited');
+    let state;
+    if (preview)                  state = visited.has(idx) ? 'visited' : 'available';
+    else if (rowDate > today)     state = 'locked';
+    else if (visited.has(idx))    state = 'visited';
+    else                          state = 'available';
+    row.classList.add(state);
+
+    const cta = row.querySelector('.card-cta');
+    if (cta) {
+      cta.textContent = state === 'locked'  ? 'Bloquejat'
+                      : state === 'visited' ? 'Tornar a obrir'
+                                            : 'Obrir';
+    }
+  });
+
+  // ---- Click handler ----
+  path.addEventListener('click', e => {
+    const row = e.target.closest('.path-row');
+    if (!row) return;
+    if (row.classList.contains('locked')) { e.preventDefault(); return; }
+    const idx = parseInt(row.dataset.idx, 10);
+    window.open(`viewer.html?d=${idx}`, '_blank', 'noopener,noreferrer');
+    markVisited(idx);
+    row.classList.remove('available');
+    row.classList.add('visited');
+    const cta = row.querySelector('.card-cta'); if (cta) cta.textContent = 'Tornar a obrir';
+    const badge = row.querySelector('.badge-new'); if (badge) badge.remove();
+  });
+})();
+</script>
+
+</body>
+</html>
