@@ -54,6 +54,33 @@
     display: block;
   }
 
+  /* Video wrapper: center the player and maintain a comfortable aspect ratio */
+  #videoWrap {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: #000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  #videoWrap.active { display: flex; }
+  #videoInner {
+    width: 100%;
+    max-width: 1200px;
+    aspect-ratio: 16 / 9;
+    box-shadow: 0 24px 56px -18px rgba(0,0,0,.6);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+  }
+  #videoFrame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
   .err {
     color: #fff; text-align: center; padding: 60px 24px;
     font-size: 16px;
@@ -86,6 +113,18 @@
   <embed id="frame" type="application/pdf" src="about:blank"
          style="width:100%; height:100%; border:0; display:block;"
          title="Visor del missatge del dia">
+
+  <!-- Video container (shown when item is a YouTube video) -->
+  <div id="videoWrap">
+    <div id="videoInner">
+      <iframe id="videoFrame"
+              src="about:blank"
+              title="Vídeo de campanya"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+
   <div id="fallback" style="display:none; color:#fff; text-align:center; padding:60px 24px; position:absolute; inset:0; background:#2A2D36;">
     <h2 style="margin:0 0 12px; font-size:22px;">No es pot mostrar el PDF aquí</h2>
     <p style="margin:0 0 20px; opacity:.85; max-width:560px; margin-left:auto; margin-right:auto;">
@@ -106,6 +145,7 @@
 
   // ---- Campaign items (NO dates here — they're loaded dynamically
   //      from index.html so you only need to update dates in ONE place) ----
+  //      An item is either a PDF (pdf: "...") or a video (video: "https://youtu.be/...").
   const items = [
     { i: 0,  pdf: "pdfs/4ce14270.pdf",  title: "Frases de suport" },
     { i: 1,  pdf: "pdfs/c11861b8.pdf",  title: "Qui som" },
@@ -116,9 +156,10 @@
     { i: 6,  pdf: "pdfs/b6a2bb56.pdf",  title: "Eix 2 · Recuperació de drets" },
     { i: 7,  pdf: "pdfs/0ea299e5.pdf",  title: "Eix 3 · Conciliació real" },
     { i: 8,  pdf: "pdfs/cd99c942.pdf",  title: "Eix 4 · Carrera professional" },
-    { i: 9,  pdf: "pdfs/89241a22.pdf",  title: "Eix 5 · Presència territorial" },
-    { i: 10, pdf: "pdfs/9ecf3e3e.pdf",  title: "Eix 6 · Fermesa i via judicial" },
-    { i: 11, pdf: "pdfs/03b3eb0e.pdf",  title: "Eix 7 · Transparència i comunicació" },
+    { i: 9,  video: "https://youtu.be/4Lls67GXddw", title: "Vídeo de campanya" },
+    { i: 10, pdf: "pdfs/89241a22.pdf",  title: "Eix 5 · Presència territorial" },
+    { i: 11, pdf: "pdfs/9ecf3e3e.pdf",  title: "Eix 6 · Fermesa i via judicial" },
+    { i: 12, pdf: "pdfs/03b3eb0e.pdf",  title: "Eix 7 · Transparència i comunicació" },
   ];
 
   // ============================================================
@@ -163,6 +204,24 @@
     if (!item.date) return true;  // fail-open if date wasn't loaded
     const d = new Date(item.date + "T00:00:00");
     return d <= today;
+  }
+
+  // Extract a YouTube video ID from any common URL form
+  // (youtu.be/ID, youtube.com/watch?v=ID, youtube.com/embed/ID)
+  function extractYouTubeId(url) {
+    try {
+      const u = new URL(url);
+      if (u.hostname.includes('youtu.be')) {
+        return u.pathname.replace(/^\//, '').split('/')[0];
+      }
+      if (u.searchParams.get('v')) return u.searchParams.get('v');
+      const parts = u.pathname.split('/').filter(Boolean);
+      const embedIdx = parts.indexOf('embed');
+      if (embedIdx !== -1 && parts[embedIdx + 1]) return parts[embedIdx + 1];
+      return parts[parts.length - 1] || '';
+    } catch {
+      return '';
+    }
   }
 
   // ---- Anti-copy / anti-context behaviour ----
@@ -215,39 +274,57 @@
     return -1;
   }
 
-  // ---- Load the PDF (with toolbar/navpanes hidden in Chromium PDF viewer) ----
+  // ---- Load a PDF or a video ----
   function load(i) {
     idx = i;
     var item = items[idx];
     document.getElementById('docTitle').textContent = item.title;
-    var pdfUrl = item.pdf + "#toolbar=0&navpanes=0&scrollbar=1";
+
     var embed = document.getElementById('frame');
     var fallback = document.getElementById('fallback');
     var directLink = document.getElementById('directLink');
+    var videoWrap = document.getElementById('videoWrap');
+    var videoFrame = document.getElementById('videoFrame');
 
-    // Reset
+    // ---- Reset both surfaces ----
     fallback.style.display = 'none';
-    embed.style.display = 'block';
-    embed.src = pdfUrl;
-    directLink.href = item.pdf;
 
-    // Detect file:// protocol — Chrome refuses to embed local PDFs in many cases.
-    // Show fallback after a brief delay if the PDF doesn't actually render.
-    if (location.protocol === 'file:') {
-      setTimeout(function () {
-        // If the embed has no rendered content (Chrome blocks local PDF embeds),
-        // its offsetHeight content stays empty. We just show the fallback as a safety net.
-        try {
-          if (!embed.contentDocument && !embed.getSVGDocument && embed.type === 'application/pdf') {
-            // We can't reliably detect failure, so for file:// we ALWAYS show the fallback option.
-            fallback.style.display = 'flex';
-            fallback.style.flexDirection = 'column';
-            fallback.style.justifyContent = 'center';
+    if (item.video) {
+      // ===== VIDEO MODE =====
+      // Hide the PDF embed and stop it from loading anything
+      embed.style.display = 'none';
+      embed.src = 'about:blank';
+
+      // Show the video container and load the YouTube embed
+      var vid = extractYouTubeId(item.video);
+      videoFrame.src = 'https://www.youtube-nocookie.com/embed/' + vid + '?rel=0&modestbranding=1';
+      videoWrap.classList.add('active');
+    } else {
+      // ===== PDF MODE =====
+      // Hide and unload the video first (so it stops playing if user navigated from a video)
+      videoWrap.classList.remove('active');
+      videoFrame.src = 'about:blank';
+
+      var pdfUrl = item.pdf + "#toolbar=0&navpanes=0&scrollbar=1";
+      embed.style.display = 'block';
+      embed.src = pdfUrl;
+      directLink.href = item.pdf;
+
+      // Detect file:// protocol — Chrome refuses to embed local PDFs in many cases.
+      // Show fallback after a brief delay if the PDF doesn't actually render.
+      if (location.protocol === 'file:') {
+        setTimeout(function () {
+          try {
+            if (!embed.contentDocument && !embed.getSVGDocument && embed.type === 'application/pdf') {
+              fallback.style.display = 'flex';
+              fallback.style.flexDirection = 'column';
+              fallback.style.justifyContent = 'center';
+            }
+          } catch (e) {
+            fallback.style.display = 'block';
           }
-        } catch (e) {
-          fallback.style.display = 'block';
-        }
-      }, 800);
+        }, 800);
+      }
     }
 
     document.title = item.title + " · ACA-UGT 2026";
